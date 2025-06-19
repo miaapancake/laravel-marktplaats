@@ -9,13 +9,21 @@
 
 @layer components {
 
+    .button {
+        @apply px-4 py-2 rounded-md cursor-pointer hover:bg-neutral-500 hover:text-neutral-100;
+    }
+
+    .card {
+        @apply bg-neutral-100 rounded-md p-4;
+    }
+
     .nav-items {
         @apply flex justify-between items-stretch m-auto h-10;
     }
 
     .nav-items-left,
     .nav-items-right {
-        @apply flex gap-4 items-stretch;
+        @apply flex gap-2 items-stretch;
     }
 
     .nav-items a {
@@ -23,10 +31,14 @@
     }
 
     .nav-item {
-        @apply inline-flex gap-1 justify-center items-center px-4 h-full font-bold;
+        @apply inline-flex gap-1 justify-center items-center px-2 h-full font-bold;
     }
 
     .nav-item span {
         @apply whitespace-nowrap;
+    }
+
+    .input {
+        @apply py-1 px-2 w-full rounded-md border-1 border-neutral-400 hover:border-neutral-500;
     }
 }

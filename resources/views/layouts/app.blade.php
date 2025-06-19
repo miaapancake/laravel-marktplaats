@@ -29,8 +29,14 @@
                     </a>
                     <a href="/users/@me">
                         <div class="nav-item">
-                            <i data-lucide=""></i>
+                            <i data-lucide="user"></i>
                             <span>{{Auth::user()->name}}</span>
+                        </div>
+                    </a>
+                    <a href="{{route('logout')}}">
+                        <div class="nav-item">
+                            <i data-lucide="log-out"></i>
+                            <span>Sign Out</span>
                         </div>
                     </a>
                 @else
@@ -43,7 +49,7 @@
                 @endif
             </div>
         </div>
-        <div class="flex justify-center p-4 m-auto max-w-4xl">
+        <div class="flex justify-center p-4 px-2 m-auto max-w-4xl">
             <form class="w-full">
                 <div class="flex items-stretch w-full h-10">
                     <input class="px-2 w-full rounded-l-md border-1 border-neutral-600" name="query"
