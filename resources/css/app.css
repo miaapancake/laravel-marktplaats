@@ -41,4 +41,8 @@
     .input {
         @apply py-1 px-2 w-full rounded-md border-1 border-neutral-400 hover:border-neutral-500;
     }
+
+    .input[disabled] {
+        @apply text-neutral-600 bg-neutral-200 cursor-not-allowed hover:border-neutral-400;
+    }
 }
