@@ -123,4 +123,17 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    | -------------------------------------------------------------------------
+    |  Currency Options
+    | -------------------------------------------------------------------------
+    |
+    | currency.locale sets the locale to use for currency formatting.
+    |
+    */
+
+    'currency' => [
+        'locale' => env("CURRENCY_LOCALE", "nl_NL")
+    ]
+
 ];

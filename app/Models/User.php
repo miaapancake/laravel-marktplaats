@@ -33,6 +33,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class)->orderBy('created_at', 'desc');
+    }
+
     /**
      * Get the attributes that should be cast.
      *

@@ -27,7 +27,7 @@ class AuthController extends Controller
 
         Auth::loginUsingId($user->id);
 
-        return redirect()->route('welcome');
+        return redirect()->route('dashboard');
     }
 
     public function login(LoginRequest $request)
@@ -38,7 +38,7 @@ class AuthController extends Controller
             return back()->withErrors(['password' => "Invalid credentials"]);
         }
 
-        return redirect()->route('welcome');
+        return redirect()->route('dashboard');
     }
 
     public function logout()

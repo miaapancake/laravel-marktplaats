@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Marktplaats</title>
+    <title>@yield('title') - Marktplaats</title>
     <script src="https://unpkg.com/lucide@latest"></script>
     @vite(['resources/css/app.css'])
 </head>
@@ -27,7 +27,7 @@
                             <span>Messages</span>
                         </div>
                     </a>
-                    <a href="/users/@me">
+                    <a href="{{route('dashboard')}}">
                         <div class="nav-item">
                             <i data-lucide="user"></i>
                             <span>{{Auth::user()->name}}</span>
