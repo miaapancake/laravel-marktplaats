@@ -1,6 +1,5 @@
 @import 'tailwindcss';
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
@@ -44,5 +43,25 @@
 
     .input[disabled] {
         @apply text-neutral-600 bg-neutral-200 cursor-not-allowed hover:border-neutral-400;
+    }
+
+    .pagination-menu {
+        @apply flex items-center rounded-md shadow-sm rtl:flex-row-reverse;
+    }
+
+    .pagination-item {
+        @apply cursor-pointer inline-flex relative items-center p-2 text-sm font-medium text-neutral-500 bg-white border border-gray-300 ring-gray-300 transition duration-150 ease-in-out focus:z-10 focus:border-blue-300 focus:ring focus:outline-none;
+    }
+
+    .pagination-item:not([aria-disabled]) {
+        @apply hover:text-neutral-800 active:text-gray-500 active:bg-gray-100;
+    }
+
+    .pagination-item[aria-disabled] {
+        @apply cursor-default text-neutral-300;
+    }
+
+    .pagination-item[aria-current="page"] {
+        @apply font-bold text-neutral-800;
     }
 }
