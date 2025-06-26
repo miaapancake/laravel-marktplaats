@@ -11,7 +11,12 @@ class UpdatePostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user();
+    }
+
+    public function getPrice()
+    {
+        return round($this->price * 100);
     }
 
     /**
@@ -24,7 +29,7 @@ class UpdatePostRequest extends FormRequest
         return [
             'title' => ['min:4', 'max:512'],
             'description' => ['min:1', 'max:2048'],
-            'price' => ['min:200', 'max:100_000_000'], // min price of 2 Euro max of 1 million Euro
+            'price' => ['required', 'numeric', 'min:2', 'max:150000', 'decimal:0,2'],
         ];
     }
 }

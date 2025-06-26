@@ -14,6 +14,11 @@ class StorePostRequest extends FormRequest
         return $this->user() && $this->user()->exists;
     }
 
+    public function getPrice()
+    {
+        return round($this->price * 100);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,8 +29,7 @@ class StorePostRequest extends FormRequest
         return [
             'title' => ['required', 'min:4', 'max:512'],
             'description' => ['required', 'min:1', 'max:2048'],
-            'price' => ['required', 'min:200', 'max:100_000_000'], // min price of 2 Euro max of 1 million Euro
-            'user_id' => ['required', 'exists:users,id'],
+            'price' => ['required', 'numeric', 'min:2', 'max:150000', 'decimal:0,2'],
         ];
     }
 }

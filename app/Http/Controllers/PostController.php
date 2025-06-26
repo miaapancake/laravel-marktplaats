@@ -5,9 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class PostController extends Controller
+class PostController extends Controller implements HasMiddleware
 {
+
+    public static function middleware()
+    {
+        return [
+            new Middleware('auth', except: ['index', 'show'])
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -21,7 +31,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -29,7 +39,17 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+        $request->validated();
+
+        $post = Post::create(array_merge(
+            $request->except('price'),
+            [
+                'price' => $request->getPrice(),
+                'user_id' => $request->user()->id
+            ]
+        ));
+
+        return redirect()->route('posts.show', $post->id);
     }
 
     /**
@@ -37,7 +57,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('posts.show', compact('post'));
     }
 
     /**

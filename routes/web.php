@@ -16,6 +16,12 @@ Route::get('/dashboard', function (Request $request) {
     return view('dashboard', compact('postsPaginator'));
 })->middleware('auth')->name('dashboard');
 
+Route::resource('/ads', PostController::class)->names('posts')->parameters([
+    'ads' => 'post'
+]);
+
+Route::resource('users', Controller::class);
+
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 

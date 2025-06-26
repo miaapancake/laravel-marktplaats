@@ -9,7 +9,7 @@
 @layer components {
 
     .button {
-        @apply font-bold px-4 py-2 rounded-md cursor-pointer hover:bg-neutral-500 hover:text-neutral-100;
+        @apply flex justify-center gap-2 border-1 border-neutral-500 font-bold px-4 py-2 rounded-md cursor-pointer hover:bg-neutral-500 hover:text-neutral-100;
     }
 
     .card {
@@ -38,7 +38,11 @@
     }
 
     .input {
-        @apply py-1 px-2 w-full rounded-md border-1 border-neutral-400 hover:border-neutral-500;
+        @apply bg-neutral-100 py-1 px-2 w-full rounded-md border-1 border-neutral-400 hover:border-neutral-500;
+    }
+
+    textarea.input {
+        @apply min-h-24;
     }
 
     .input[disabled] {
