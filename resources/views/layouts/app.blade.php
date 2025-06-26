@@ -10,7 +10,8 @@
 </head>
 
 <body class="bg-neutral-200">
-    <nav class="bg-neutral-100">
+    <div class="h-32"></div>
+    <nav class="fixed top-0 w-full h-32 bg-neutral-100">
         <div class="max-w-4xl nav-items">
             <div class="justify-start nav-items-left">
                 <a href="{{route('welcome')}}">

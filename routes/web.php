@@ -3,11 +3,13 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PostController;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    $postPaginator = Post::orderBy('created_at', 'desc')->paginate(50)->onEachSide(1);
+    return view('welcome', compact('postPaginator'));
 })->name('welcome');
 
 Route::get('/dashboard', function (Request $request) {
