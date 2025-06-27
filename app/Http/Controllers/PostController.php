@@ -8,7 +8,6 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
-use Illuminate\Validation\UnauthorizedException;
 
 class PostController extends Controller implements HasMiddleware
 {
@@ -25,7 +24,7 @@ class PostController extends Controller implements HasMiddleware
      */
     public function index()
     {
-        //
+        return redirect()->route('welcome');
     }
 
     /**
@@ -99,8 +98,14 @@ class PostController extends Controller implements HasMiddleware
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy(Request $request, Post $post)
     {
-        //
+        if (!$request->user()->can('delete', $post)) {
+            return abort(403, "You are not allowed to delete this post!");
+        }
+
+        $post->delete();
+
+        return redirect()->route('posts.index');
     }
 }

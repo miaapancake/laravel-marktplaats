@@ -13,7 +13,12 @@
                             <i class="size-4" data-lucide="pencil"></i>
                             <span>Edit</span>
                         </a>
-                        <form onsubmit="return confirm('Are you sure you want to delete this advertisement?');" class="inline" method="POST" action="{{route('posts.edit', $post->id)}}">
+                        <form
+                            onsubmit="return confirm('Are you sure you want to delete this advertisement?');"
+                            class="inline"
+                            method="POST"
+                            action="{{route('posts.destroy', $post->id)}}"
+                        >
                             <button class="inline-flex p-2 button">
                                 <i class="size-4" data-lucide="trash"></i>
                                 <span>Delete</span>
