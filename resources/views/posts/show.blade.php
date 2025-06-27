@@ -7,7 +7,7 @@
         <main class="card">
             <h1 class="flex justify-between">
                 <span class="text-2xl font-bold">{{$post->title}}</span>
-                @if($post->user->id == Auth::user()->id)
+                @if(Auth::user() && $post->user->id == Auth::user()->id)
                     <span>
                         <a class="inline-flex p-2 button" href="{{route('posts.edit', $post->id)}}">
                             <i class="size-4" data-lucide="pencil"></i>
