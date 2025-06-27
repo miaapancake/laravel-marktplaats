@@ -20,9 +20,8 @@
             <p class="mt-4 whitespace-pre-line">{{$post->description}}</p>
         </main>
         <div class="card">
-            <h1 class="text-xl font-bold">Price</h1>
-            <h2 class="font-semibold">{{$post->displayPrice()}}</h2>
-            <h1 class="text-xl font-bold">Bids</h1>
+            <h1 class="text-xl font-semibold">Price</h1>
+            <h2 class="text-xl font-bold">{{$post->displayPrice()}}</h2>
         </div>
     </div>
 @endsection
