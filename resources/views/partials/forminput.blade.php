@@ -6,7 +6,7 @@
         class="input @error($name) border-red-400 @enderror"
     >{{old($name) ?? $value ?? ''}}</textarea>
 
-@elseif($name == 'price')
+@elseif(isset($type) && $type == 'price')
     <div class="flex max-w-32">
         <div class="flex justify-center items-center rounded-r-none border-r-0 size-8 input">
             €

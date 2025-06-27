@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
         User::factory(300)->create();
 
         $this->call([
-            PostSeeder::class
+            PostSeeder::class,
+            BidSeeder::class
         ]);
     }
 }

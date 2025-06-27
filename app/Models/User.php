@@ -38,6 +38,23 @@ class User extends Authenticatable
         return $this->hasMany(Post::class)->orderBy('created_at', 'desc');
     }
 
+    public function bids()
+    {
+        return $this->hasMany(Bid::class);
+    }
+
+    public function offeredBids()
+    {
+        return $this->hasManyThrough(
+            Bid::class,
+            Post::class,
+            'user_id',
+            'post_id',
+            'id',
+            'id'
+        );
+    }
+
     /**
      * Get the attributes that should be cast.
      *

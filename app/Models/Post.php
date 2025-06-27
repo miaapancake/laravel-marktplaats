@@ -25,6 +25,16 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function bids()
+    {
+        return $this->hasMany(Bid::class);
+    }
+
+    public function highestBid()
+    {
+        return $this->bids()->orderBy('amount', 'desc')->first();
+    }
+
     public function displayPrice()
     {
         $fmt = numfmt_create(Config::get("app.currency.locale"), NumberFormatter::CURRENCY);

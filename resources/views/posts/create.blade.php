@@ -9,7 +9,7 @@
             @include('partials.forminput', ['name' => 'title'])
             @include('partials.forminput', ['name' => 'description', 'type' => 'textarea'])
 
-            @include('partials.forminput', ['name' => 'price', 'type' => 'number'])
+            @include('partials.forminput', ['name' => 'price', 'type' => 'price'])
 
             @csrf
 
