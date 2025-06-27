@@ -11,7 +11,7 @@ class UpdatePostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user();
+        return !!$this->user();
     }
 
     public function getPrice()

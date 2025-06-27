@@ -4,7 +4,7 @@
         id="{{$name}}"
         name="{{$name}}"
         class="input @error($name) border-red-400 @enderror"
-    >{{old($name)}}</textarea>
+    >{{old($name) ?? $value ?? ''}}</textarea>
 
 @elseif($name == 'price')
     <div class="flex max-w-32">
@@ -16,7 +16,7 @@
             name="{{$name}}"
             class="rounded-l-none h-8 input @error($name) border-red-400 @enderror"
             type="number"
-            value="{{old($name)}}"
+            value="{{old($name) ?? $value ?? ''}}"
             step="0.01"
             placeholder="0.00"
         />
@@ -27,7 +27,7 @@
         name="{{$name}}"
         class="input @error($name) border-red-400 @enderror"
         type="{{$type ?? 'text'}}"
-        value="{{old($name)}}"
+        value="{{old($name) ?? $value ?? ''}}"
     />
 @endif
 @include('partials.formerror', ['name' => $name])

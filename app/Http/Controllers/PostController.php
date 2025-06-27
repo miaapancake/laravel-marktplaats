@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Validation\UnauthorizedException;
 
 class PostController extends Controller implements HasMiddleware
 {
@@ -63,9 +65,14 @@ class PostController extends Controller implements HasMiddleware
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Post $post)
+    public function edit(Request $request, Post $post)
     {
-        //
+
+        if (!$request->user()->can('update', $post)) {
+            return abort(403, "You are not allowed to edit this post!");
+        }
+
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -73,7 +80,20 @@ class PostController extends Controller implements HasMiddleware
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $request->validated();
+
+        if (!$request->user()->can('update', $post)) {
+            return abort(403, "You are not allowed to edit this post!");
+        }
+
+        $post->update(array_merge(
+            $request->except('price'),
+            [
+                'price' => $request->getPrice()
+            ]
+        ));
+
+        return redirect()->route('posts.show', $post->id);
     }
 
     /**
