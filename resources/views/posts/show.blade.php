@@ -5,6 +5,7 @@
 @section('content')
     <div class="grid gap-4 items-start p-4 m-4 mx-auto max-w-5xl max-lg:grid-cols-1 grid-cols-[600px_auto]">
         <main class="card">
+            <h2>@include('partials.categories.breadcrumb', ['category' => $post->category])</h2>
             <h1 class="flex justify-between">
                 <span class="text-2xl font-bold">{{$post->title}}</span>
                 @if(Auth::user() && $post->user->id == Auth::user()->id)

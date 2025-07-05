@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BidController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PostController;
 use App\Models\Post;
@@ -10,8 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $postPaginator = Post::orderBy('created_at', 'desc')->paginate(50)->onEachSide(1);
-
-    return view('welcome', compact('postPaginator'));
+    return view('posts.index', compact('postPaginator'));
 })->name('welcome');
 
 Route::get('/dashboard', function (Request $request) {
@@ -25,7 +25,9 @@ Route::resource('/ads', PostController::class)->names('posts')->parameters([
     'ads' => 'post'
 ]);
 
-Route::resource('/bids', BidController::class)->only(['store', 'destroy']);
+Route::resource('bids', BidController::class)->only(['store', 'destroy']);
+
+Route::resource('categories', CategoryController::class)->only('show');
 
 Route::resource('users', Controller::class);
 
