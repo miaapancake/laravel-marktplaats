@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -26,6 +27,7 @@ class PostFactory extends Factory
             'premium' => $this->faker->boolean(5),
             'created_at' => $this->faker->dateTimeThisDecade(),
             'price' => $this->faker->numberBetween(0, 100_000),
+            'category_id' => Category::pluck('id')->random(),
             'updated_at' => null
         ];
     }
