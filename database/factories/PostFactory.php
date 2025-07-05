@@ -18,12 +18,10 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
-        $users = User::pluck('id')->toArray();
-
         return [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph(20),
-            'user_id' => $this->faker->randomElement($users),
+            'user_id' => User::pluck('id')->random(),
             'premium' => $this->faker->boolean(5),
             'created_at' => $this->faker->dateTimeThisDecade(),
             'price' => $this->faker->numberBetween(0, 100_000),
