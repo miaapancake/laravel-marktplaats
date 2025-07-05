@@ -31,7 +31,7 @@ class BidController extends Controller implements HasMiddleware
             return abort(403, "You are not allowed to bid on your own advertisements!");
         }
 
-        if ($post->highestBid()->amount >= $request->getAmount()) {
+        if ($post->highestBid() && $post->highestBid()->amount >= $request->getAmount()) {
             return back()->withErrors([
                 'amount' => "Your bid must be higher than the current highest bid"
             ]);

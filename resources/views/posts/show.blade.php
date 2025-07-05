@@ -50,9 +50,10 @@
             </div>
             <div class="mt-4 card">
                 @if(Auth::user() && Auth::user()->id != $post->user_id)
+                    @php($highestBid = $post->highestBid())
                     <form class="mb-4" action="{{route('bids.store')}}" method="POST">
                         <h1 class="font-semibold">Make a bid on this item</h1>
-                        @include('partials.forminput', ['name' => 'amount', 'type' => 'price', 'value' => number_format(($post->highestBid()->amount/100)+1, 2) ])
+                        @include('partials.forminput', ['name' => 'amount', 'type' => 'price', 'value' => number_format(($highestBid ? $highestBid->amount/100 : 1)+1, 2) ])
                         <input name="post_id" type="hidden" value="{{$post->id}}" />
                         @csrf
 
