@@ -42,6 +42,11 @@ class Post extends Model
         return $fmt->formatCurrency($this->price / 100, $fmt->getSymbol($fmt::INTL_CURRENCY_SYMBOL));
     }
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
     protected function casts(): array
     {
         return [
