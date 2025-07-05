@@ -5,7 +5,6 @@
         name="{{$name}}"
         class="input @error($name) border-red-400 @enderror"
     >{{old($name) ?? $value ?? ''}}</textarea>
-
 @elseif(isset($type) && $type == 'price')
     <div class="flex max-w-32">
         <div class="flex justify-center items-center rounded-r-none border-r-0 size-8 input">
@@ -21,6 +20,23 @@
             placeholder="0.00"
         />
     </div>
+@elseif(isset($type) && $type == 'select')
+    <select
+        id="{{$name}}"
+        name="{{$name}}_id"
+        class="input @error($name) border-red-400 @enderror"
+    >
+        @foreach($items as $item)
+            <option
+                value="{{$item->id}}"
+                @if($selected && $selected == $item->id)
+                    selected
+                @endif
+            >
+                {{$item->name}}
+            </option>
+        @endforeach
+    </select>
 @else
     <input
         id="{{$name}}"

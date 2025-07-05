@@ -8,8 +8,9 @@
         <form method="POST" action="{{route('posts.store')}}">
             @include('partials.forminput', ['name' => 'title'])
             @include('partials.forminput', ['name' => 'description', 'type' => 'textarea'])
-
             @include('partials.forminput', ['name' => 'price', 'type' => 'price'])
+
+            @include('partials.forminput', ['name' => 'category', 'type' => 'select', 'items' => $categories])
 
             @csrf
 

@@ -17,7 +17,8 @@ class Post extends Model
         'description',
         'user_id',
         'premium',
-        'price'
+        'price',
+        'category_id'
     ];
 
     public function user()

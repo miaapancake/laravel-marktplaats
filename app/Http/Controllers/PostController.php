@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -32,7 +33,9 @@ class PostController extends Controller implements HasMiddleware
      */
     public function create()
     {
-        return view('posts.create');
+        return view('posts.create', [
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -66,12 +69,13 @@ class PostController extends Controller implements HasMiddleware
      */
     public function edit(Request $request, Post $post)
     {
-
         if (!$request->user()->can('update', $post)) {
             return abort(403, "You are not allowed to edit this post!");
         }
 
-        return view('posts.edit', compact('post'));
+        $categories = Category::all();
+
+        return view('posts.edit', compact('post', 'categories'));
     }
 
     /**

@@ -30,6 +30,7 @@ class StorePostRequest extends FormRequest
             'title' => ['required', 'min:4', 'max:512'],
             'description' => ['required', 'min:1', 'max:2048'],
             'price' => ['required', 'numeric', 'min:2', 'max:150000', 'decimal:0,2'],
+            'category_id' => ['required', 'exists:categories,id']
         ];
     }
 }

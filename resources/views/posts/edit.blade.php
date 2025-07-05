@@ -10,6 +10,8 @@
             @include('partials.forminput', ['name' => 'description', 'type' => 'textarea', 'value' => $post->description])
             @include('partials.forminput', ['name' => 'price', 'type' => 'number', 'value' => $post->price / 100])
 
+            @include('partials.forminput', ['name' => 'category', 'type' => 'select', 'items' => $categories, 'selected' => $post->category_id])
+
             @method('PUT')
             @csrf
 
