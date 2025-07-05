@@ -6,30 +6,30 @@
     <div class="grid gap-4 items-start p-4 m-4 mx-auto max-w-5xl max-lg:grid-cols-1 grid-cols-[600px_auto]">
         <main class="card">
             <h2>@include('partials.categories.breadcrumb', ['category' => $post->category])</h2>
-            <h1 class="flex justify-between">
+            <h1>
                 <span class="text-2xl font-bold">{{$post->title}}</span>
-                @if(Auth::user() && $post->user->id == Auth::user()->id)
-                    <span>
-                        <a class="inline-flex p-2 button" href="{{route('posts.edit', $post->id)}}">
-                            <i class="size-4" data-lucide="pencil"></i>
-                            <span>Edit</span>
-                        </a>
-                        <form
-                            onsubmit="return confirm('Are you sure you want to delete this advertisement?');"
-                            class="inline"
-                            method="POST"
-                            action="{{route('posts.destroy', $post->id)}}"
-                        >
-                            <button class="inline-flex p-2 button">
-                                <i class="size-4" data-lucide="trash"></i>
-                                <span>Delete</span>
-                            </button>
-                            @method('DELETE')
-                            @csrf
-                        </form>
-                    </span>
-                @endif
             </h1>
+            @if(Auth::user() && $post->user->id == Auth::user()->id)
+                <div class="my-2">
+                    <a class="inline-flex p-1 text-sm button" href="{{route('posts.edit', $post->id)}}">
+                        <i class="size-4" data-lucide="pencil"></i>
+                        <span>Edit</span>
+                    </a>
+                    <form
+                        onsubmit="return confirm('Are you sure you want to delete this advertisement?');"
+                        class="inline"
+                        method="POST"
+                        action="{{route('posts.destroy', $post->id)}}"
+                    >
+                        <button class="inline-flex p-1 text-sm button">
+                            <i class="size-4" data-lucide="trash"></i>
+                            <span>Delete</span>
+                        </button>
+                        @method('DELETE')
+                        @csrf
+                    </form>
+                </div>
+            @endif
             <h2 class="text-neutral-800">
                 <span>
                     Offered by

@@ -33,7 +33,7 @@ class BidFactory extends Factory
         BidFactory::$previousDate[$post->id] = $this->faker->dateTimeBetween(BidFactory::$previousDate[$post->id] ?? $post->created_at);
 
         return [
-            'user_id' => User::inRandomOrder()->first()->id,
+            'user_id' => User::whereNot('id', $post->user_id)->pluck('id')->random(),
             'post_id' => $post->id,
             'amount' =>  BidFactory::$previousAmount[$post->id],
             'created_at' => BidFactory::$previousDate[$post->id],
