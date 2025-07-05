@@ -25,6 +25,14 @@ Route::resource('/ads', PostController::class)->names('posts')->parameters([
     'ads' => 'post'
 ]);
 
+Route::get('/search', function (Request $request) {
+
+    $postPaginator = Post::search($request->query("query"))->paginate(50, 'page');
+
+
+    return view('posts.index', compact('postPaginator'));
+});
+
 Route::resource('bids', BidController::class)->only(['store', 'destroy']);
 
 Route::resource('categories', CategoryController::class)->only('show');

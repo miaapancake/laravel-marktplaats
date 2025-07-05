@@ -51,10 +51,10 @@
             </div>
         </div>
         <div class="flex justify-center p-4 px-2 m-auto max-w-4xl">
-            <form class="w-full">
+            <form action="/search" class="w-full">
                 <div class="flex items-stretch w-full h-10">
                     <input class="px-2 w-full rounded-l-md border-1 border-neutral-600" name="query"
-                        placeholder="search..." type="text" />
+                        placeholder="search..." type="text" value="{{ !empty(app('request')->input('query')) ? app('request')->input('query') : '' }}" />
                     <button
                         class="px-4 rounded-r-md border-l-0 cursor-pointer bg-neutral-100 border-1 border-neutral-600"
                         type="submit">Search</button>
