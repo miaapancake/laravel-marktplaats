@@ -49,7 +49,7 @@
             </div>
             <div class="mt-4 card">
                 @if(Auth::user() && Auth::user()->id != $post->user_id)
-                    <form class="my-4" action="{{route('bids.store')}}" method="POST">
+                    <form class="mb-4" action="{{route('bids.store')}}" method="POST">
                         <h1 class="font-semibold">Make a bid on this item</h1>
                         @include('partials.forminput', ['name' => 'amount', 'type' => 'price', 'value' => number_format(($post->highestBid()->amount/100)+1, 2) ])
                         <input name="post_id" type="hidden" value="{{$post->id}}" />
@@ -63,7 +63,6 @@
                     <div class="p-4 mt-2 rounded-md bg-neutral-200">
                         <h1 class="font-bold">{{$bid->displayPrice()}}</h1>
                         <h2>By {{$bid->user->name}}</h2>
-
                     </div>
                 @endforeach
             </div>
