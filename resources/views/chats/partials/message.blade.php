@@ -8,7 +8,7 @@
     @if(!$messageOwned)
         <h1 class="font-semibold">{{$message->author->name}}</h1>
     @endif
-    <p>{{$message->content}}</p>
+    <p class="max-w-full whitespace-pre-wrap break-words">{{$message->content}}</p>
     <h2 class="absolute bottom-0 block whitespace-nowrap opacity-80 translate-y-full text-end @if($messageOwned) right-0 @else left-0 @endif">
         {{$message->created_at->format('F j, Y g:i a')}}
     </h2>
