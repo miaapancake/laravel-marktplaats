@@ -46,8 +46,11 @@ class ChatController extends Controller implements HasMiddleware
     /**
      * Display the specified resource.
      */
-    public function show(Chat $chat)
+    public function show(Request $request, Chat $chat)
     {
+        if (!$request->user()->can('view', $chat)) {
+            return abort(403, "You are not allowed to view this chat!");
+        }
         return view('chats.show', compact('chat'));
     }
 

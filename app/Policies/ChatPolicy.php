@@ -21,7 +21,7 @@ class ChatPolicy
      */
     public function view(User $user, Chat $chat): bool
     {
-        return false;
+        return $chat->users()->get()->contains('id', $user->id);
     }
 
     /**
