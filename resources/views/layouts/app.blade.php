@@ -11,7 +11,7 @@
 
 <body class="bg-neutral-200">
     <div class="h-32"></div>
-    <nav class="fixed top-0 w-full h-32 bg-neutral-100">
+    <nav class="fixed top-0 z-50 w-full h-32 bg-neutral-100">
         <div class="max-w-4xl nav-items">
             <div class="justify-start nav-items-left">
                 <a href="{{route('welcome')}}">
@@ -22,7 +22,7 @@
             </div>
             <div class="justify-end nav-items-right">
                 @if(Auth::user())
-                    <a href="/messages">
+                    <a href="{{route('chats.index')}}">
                         <div class="nav-item">
                             <i data-lucide="message-circle"></i>
                             <span>Messages</span>
@@ -57,12 +57,16 @@
                         placeholder="search..." type="text" value="{{ !empty(app('request')->input('query')) ? app('request')->input('query') : '' }}" />
                     <button
                         class="px-4 rounded-r-md border-l-0 cursor-pointer bg-neutral-100 border-1 border-neutral-600"
-                        type="submit">Search</button>
+                        type="submit"
+                    >
+                         Search
+                    </button>
                 </div>
             </form>
         </div>
     </nav>
     @yield('content')
+    @vite(['resources/js/app.js'])
     <script>
         lucide.createIcons();
     </script>

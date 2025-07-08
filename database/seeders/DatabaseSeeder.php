@@ -12,17 +12,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
         User::factory()->create([
             'name' => 'alex',
             'email' => 'alex@mail.home.arpa',
         ]);
+
         User::factory(300)->create();
 
         $this->call([
             CategorySeeder::class,
             PostSeeder::class,
-            BidSeeder::class
+            BidSeeder::class,
+            ChatSeeder::class,
+            MessageSeeder::class
         ]);
     }
 }

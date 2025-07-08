@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BidController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PostController;
 use App\Models\Post;
@@ -32,6 +33,8 @@ Route::get('/search', function (Request $request) {
 
     return view('posts.index', compact('postPaginator'));
 });
+
+Route::resource("chats", ChatController::class);
 
 Route::resource('bids', BidController::class)->only(['store', 'destroy']);
 
