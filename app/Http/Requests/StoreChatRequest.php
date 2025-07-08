@@ -11,7 +11,7 @@ class StoreChatRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return !!$this->user();
     }
 
     /**
@@ -22,7 +22,7 @@ class StoreChatRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'post_id' => ['required', 'exists:posts,id']
         ];
     }
 }

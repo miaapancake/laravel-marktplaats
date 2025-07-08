@@ -17,11 +17,13 @@
                                 <span class="mr-2 font-semibold">{{$user->name}}</span>
                             @endforeach
                         </h2>
-                        <h3>
-                            <div class="font-semibold opacity-70">from {{$lastMessage->author->name}}</div>
-                            <div>{{$lastMessage->content}}</div>
-                        </h3>
-                        <h4 class="mt-4 text-right">{{$lastMessage->created_at->format('F j, Y g:i a')}}</h4>
+                        @if($lastMessage)
+                            <h3>
+                                <div class="font-semibold opacity-70">from {{$lastMessage->author->name}}</div>
+                                <div>{{$lastMessage->content}}</div>
+                            </h3>
+                            <h4 class="mt-4 text-right">{{$lastMessage->created_at->format('F j, Y g:i a')}}</h4>
+                        @endif
                     </div>
                 </a>
             @endforeach

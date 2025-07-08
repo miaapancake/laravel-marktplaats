@@ -29,7 +29,7 @@
         @foreach($items as $item)
             <option
                 value="{{$item->id}}"
-                @if($selected && $selected == $item->id)
+                @if(isset($selected) && $selected == $item->id)
                     selected
                 @endif
             >

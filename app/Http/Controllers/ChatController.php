@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreChatRequest;
-use App\Http\Requests\UpdateChatRequest;
 use App\Models\Chat;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 
@@ -28,19 +28,28 @@ class ChatController extends Controller implements HasMiddleware
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreChatRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $post = Post::find($data['post_id']);
+
+        if (!$post->exists) {
+            return abort(404, "Ad not found!");
+        }
+
+        $post_author = $post->user;
+
+        $chat = Chat::create($data);
+
+        $chat->users()->sync([
+            $request->user()->id,
+            $post_author->id
+        ]);
+
+        return redirect()->route('chats.show', $chat->id);
     }
 
     /**
@@ -52,22 +61,6 @@ class ChatController extends Controller implements HasMiddleware
             return abort(403, "You are not allowed to view this chat!");
         }
         return view('chats.show', compact('chat'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Chat $chat)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateChatRequest $request, Chat $chat)
-    {
-        //
     }
 
     /**

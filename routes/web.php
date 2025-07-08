@@ -5,6 +5,7 @@ use App\Http\Controllers\BidController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PostController;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -35,6 +36,7 @@ Route::get('/search', function (Request $request) {
 });
 
 Route::resource("chats", ChatController::class);
+Route::resource("messages", MessageController::class);
 
 Route::resource('bids', BidController::class)->only(['store', 'destroy']);
 

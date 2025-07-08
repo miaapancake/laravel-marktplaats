@@ -2,6 +2,8 @@
 
 @section('title', $post['title'])
 
+@php($ownedByMe = Auth::user() && Auth::user()->id == $post->user_id)
+
 @section('content')
     <div class="grid gap-4 items-start p-4 m-4 mx-auto max-w-5xl max-lg:grid-cols-1 grid-cols-[600px_auto]">
         <main class="card">
@@ -9,7 +11,7 @@
             <h1>
                 <span class="text-2xl font-bold">{{$post->title}}</span>
             </h1>
-            @if(Auth::user() && $post->user->id == Auth::user()->id)
+            @if($ownedByMe)
                 <div class="my-2">
                     <a class="inline-flex p-1 text-sm button" href="{{route('posts.edit', $post->id)}}">
                         <i class="size-4" data-lucide="pencil"></i>
@@ -47,9 +49,16 @@
             <div class="card">
                 <h1 class="font-semibold">Price</h1>
                 <h2 class="text-xl font-bold">{{$post->displayPrice()}}</h2>
+                @if(!$ownedByMe)
+                    <form action="{{route('chats.store')}}" method="POST">
+                        @csrf
+                        <input type="hidden" name="post_id" value="{{$post->id}}" />
+                        <button class="mt-4 button">Send Message To Seller</button>
+                    </form>
+                @endif
             </div>
             <div class="mt-4 card">
-                @if(Auth::user() && Auth::user()->id != $post->user_id)
+                @if(!$ownedByMe)
                     @php($highestBid = $post->highestBid())
                     <form class="mb-4" action="{{route('bids.store')}}" method="POST">
                         <h1 class="font-semibold">Make a bid on this item</h1>
@@ -61,12 +70,18 @@
                     </form>
                 @endif
                 <h1 class="font-semibold">Bids</h1>
-                @foreach($post->bids()->orderBy('amount', 'desc')->get() as $bid)
-                    <div class="p-4 mt-2 rounded-md bg-neutral-200">
-                        <h1 class="font-bold">{{$bid->displayPrice()}}</h1>
-                        <h2>By {{$bid->user->name}}</h2>
-                    </div>
-                @endforeach
+                @php($bids = $post->bids()->orderBy('amount', 'desc')->get())
+
+                @if(sizeof($bids) > 0)
+                    @foreach($bids as $bid)
+                        <div class="p-4 mt-2 rounded-md bg-neutral-200">
+                            <h1 class="font-bold">{{$bid->displayPrice()}}</h1>
+                            <h2>By {{$bid->user->name}}</h2>
+                        </div>
+                    @endforeach
+                @else
+                    <p>No bids yet...</p>
+                @endif
             </div>
         </div>
 
