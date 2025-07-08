@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMessageRequest;
-use App\Http\Requests\UpdateMessageRequest;
+use App\Mail\MessageReceived;
 use App\Models\Chat;
 use App\Models\Message;
+use Illuminate\Support\Facades\Mail;
 
 class MessageController extends Controller
 {
@@ -27,6 +28,10 @@ class MessageController extends Controller
             'author_id' => $request->user()->id,
             'content' => $data['message']
         ]);
+
+        foreach ($chat->users()->get() as $user) {
+            Mail::to($user)->send(new MessageReceived($message));
+        }
 
         if ($request->header('Hx-Request')) {
             return view('chats.partials.message', compact('message'));
