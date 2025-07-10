@@ -8,7 +8,9 @@ function listenForChatMessages(chatId) {
     Echo.private(`chats.${chatId}`)
         .listen('ChatMessageSent', (e) => {
             htmx.ajax('GET', `/messages/${e.message.id}`, { target: '#messages', swap: 'beforeend' }).then(() => {
-                notification.play();
+                if (document.hidden) {
+                    notification.play();
+                }
             });
         });
 }
