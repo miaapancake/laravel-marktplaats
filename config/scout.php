@@ -11,11 +11,11 @@ return [
     | using Laravel Scout. This connection is used when syncing all models
     | to the search service. You should adjust this based on your needs.
     |
-    | Supported: "meilisearch"
+    | Supported: "meilisearch", "database"
     |
     */
 
-    'driver' => 'meilisearch',
+    'driver' => env('SCOUT_DRIVER', 'database'),
 
     /*
     |--------------------------------------------------------------------------
