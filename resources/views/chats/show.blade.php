@@ -3,6 +3,7 @@
 @section('title', 'Messages')
 
 @section('content')
+    <meta name="chat_id" content="{{ $chat->id }}">
     <main class="my-4 mx-auto max-w-3xl card">
         <a class="hover:underline" href="{{route('posts.show', $chat->post->id)}}">
             <h1 class="mb-4 text-xl font-semibold">{{$chat->post->title}}</h1>
@@ -46,4 +47,5 @@
             </div>
         </form>
     </main>
+    @vite(['resources/js/chat.js'])
 @endsection

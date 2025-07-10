@@ -1,5 +1,7 @@
 import './bootstrap';
 
+window.axios.defaults.headers.common['X-Socket-Id'] = window.Echo.socketId();
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // Automatically scroll marked divs to bottom
@@ -28,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('htmx:configRequest', (e) => {
         e.detail.headers['X-CSRF-TOKEN'] = CSRF_TOKEN;
+        e.detail.headers['X-Socket-Id'] = window.Echo.socketId();
     });
 
 
