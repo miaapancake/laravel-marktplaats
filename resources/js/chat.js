@@ -1,12 +1,15 @@
 import './bootstrap';
 
+const notification = new Audio("/notification.wav");
+
 function listenForChatMessages(chatId) {
     console.debug(`Listening for chat messages in chat: ${chatId}`);
 
     Echo.private(`chats.${chatId}`)
         .listen('ChatMessageSent', (e) => {
-            console.log(e);
-            htmx.ajax('GET', `/messages/${e.message.id}`, { target: '#messages', swap: 'beforeend' })
+            htmx.ajax('GET', `/messages/${e.message.id}`, { target: '#messages', swap: 'beforeend' }).then(() => {
+                notification.play();
+            });
         });
 }
 
