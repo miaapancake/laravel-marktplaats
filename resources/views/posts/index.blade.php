@@ -11,7 +11,12 @@
             @foreach($postPaginator as $post)
                 <a href="{{route('posts.show', $post->id)}}">
                     <div class="flex flex-col justify-between h-full hover:shadow-lg card">
-                        <h1 class="mb-4">{{$post->title}}</h1>
+                        <h1 class="mb-4">
+                            @if($post->premium)
+                                <span class="inline p-1 bg-blue-300 rounded-md">Premium</span>
+                            @endif
+                            <span>{{$post->title}}</span>
+                        </h1>
                         <h2 class="text-lg font-bold text-neutral-800">{{$post->displayPrice()}}</h2>
                     </div>
                 </a>

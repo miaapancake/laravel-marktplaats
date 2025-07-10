@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $postPaginator = Post::orderBy('created_at', 'desc')->paginate(50)->onEachSide(1);
+    $postPaginator = Post::orderBy('premium', 'desc')->orderBy('created_at', 'desc')->paginate(50)->onEachSide(1);
     return view('posts.index', compact('postPaginator'));
 })->name('welcome');
 
@@ -29,7 +29,7 @@ Route::resource('/ads', PostController::class)->names('posts')->parameters([
 
 Route::get('/search', function (Request $request) {
 
-    $postPaginator = Post::search($request->query("query"))->paginate(50, 'page');
+    $postPaginator = Post::search($request->query("query"))->orderBy('premium', 'desc')->paginate(50, 'page');
 
 
     return view('posts.index', compact('postPaginator'));

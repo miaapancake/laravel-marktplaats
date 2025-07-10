@@ -8,8 +8,11 @@
     <div class="grid gap-4 items-start p-4 m-4 mx-auto max-w-5xl max-lg:grid-cols-1 grid-cols-[600px_auto]">
         <main class="card">
             <h2>@include('partials.categories.breadcrumb', ['category' => $post->category])</h2>
-            <h1>
+            <h1 class="flex gap-1 items-center">
                 <span class="text-2xl font-bold">{{$post->title}}</span>
+                @if($post->premium)
+                    <span class="p-2 py-1 text-sm font-bold bg-blue-300 rounded-md">Premium</span>
+                @endif
             </h1>
             @if($ownedByMe)
                 <div class="my-2">
@@ -30,6 +33,21 @@
                         @method('DELETE')
                         @csrf
                     </form>
+                    @if(!$post->premium && $ownedByMe)
+                        <form
+                            class="mt-2"
+                            method="POST"
+                            action="{{route('posts.update', $post->id)}}"
+                        >
+                            <input type="hidden" name="premium" value="1" />
+                            @method('PUT')
+                            @csrf
+                            <button type="submit" class="inline-flex p-2 button button-primary">
+                                <i class="size-6" data-lucide="chevrons-up"></i>
+                                <span>SUPERCHARGE YOUR AD</span>
+                            </button>
+                        </form>
+                    @endif
                 </div>
             @endif
             <h2 class="text-neutral-800">

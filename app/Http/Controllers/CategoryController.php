@@ -12,7 +12,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $postPaginator = Post::orderBy('created_at', 'desc')->whereIn('category_id', $category->allSubcategories()->pluck('id'))->paginate(50)->onEachSide(1);
+        $postPaginator = Post::orderBy('premium', 'desc')->orderBy('created_at', 'desc')->whereIn('category_id', $category->allSubcategories()->pluck('id'))->paginate(50)->onEachSide(1);
 
         return view('posts.index', compact('postPaginator', 'category'));
     }

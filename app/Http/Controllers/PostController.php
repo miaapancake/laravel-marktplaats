@@ -92,7 +92,7 @@ class PostController extends Controller implements HasMiddleware
         $post->update(array_merge(
             $request->except('price'),
             [
-                'price' => $request->getPrice()
+                'price' => $request->getPrice() ?? $post->price
             ]
         ));
 

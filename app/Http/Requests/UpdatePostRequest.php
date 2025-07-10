@@ -16,7 +16,7 @@ class UpdatePostRequest extends FormRequest
 
     public function getPrice()
     {
-        return round($this->price * 100);
+        return $this->price ? round($this->price * 100) : null;
     }
 
     /**
@@ -27,9 +27,10 @@ class UpdatePostRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'premium' => 'bool',
             'title' => ['min:4', 'max:512'],
             'description' => ['min:1', 'max:2048'],
-            'price' => ['required', 'numeric', 'min:2', 'max:150000', 'decimal:0,2'],
+            'price' => ['numeric', 'min:2', 'max:150000', 'decimal:0,2'],
             'category_id' => ['exists:categories,id']
         ];
     }
